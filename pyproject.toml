@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "image-stitcher"
+version = "0.1.0"
+description = ""
+authors = ["scbmark <scbmark@gmail.com>"]
+readme = "README.md"
+packages = [{include = "image_stitcher"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+pyside6 = "^6.6.1"
+certifi = "^2023.11.17"
+pillow = "^10.1.0"
+filetype = "^1.2.0"
+
+[tool.poetry.group.dev.dependencies]
+nuitka = "^1.9.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
