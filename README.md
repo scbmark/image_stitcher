@@ -1,8 +1,8 @@
-# Auto Image Report
+# Image Stitcher
 
-一個用來自動生成一頁二圖式的圖片報告的軟體。
+讀取圖片並將其接合。
 
-本專案開發主要基於 Python 3.11.5、 PySide6 、 Pillow 和 python-docx。
+本專案開發主要基於 Python 3.11.5、 PySide6 和 Pillow。
 
 ## 注意事項
 
