@@ -82,6 +82,9 @@
             <property name="checked">
              <bool>true</bool>
             </property>
+            <attribute name="buttonGroup">
+             <string notr="true">stitch_mode</string>
+            </attribute>
            </widget>
           </item>
           <item>
@@ -92,12 +95,15 @@
             <property name="text">
              <string>垂直</string>
             </property>
+            <attribute name="buttonGroup">
+             <string notr="true">stitch_mode</string>
+            </attribute>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <spacer name="horizontalSpacer">
+         <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -110,18 +116,44 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="clear_list_btn">
-          <property name="toolTip">
-           <string>清空列表的物件</string>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="leftMargin">
+           <number>10</number>
           </property>
-          <property name="text">
-           <string>清空列表</string>
+          <property name="topMargin">
+           <number>10</number>
           </property>
-          <property name="icon">
-           <iconset resource="../resources_rc.qrc">
-            <normaloff>:/statics/clear_all.svg</normaloff>:/statics/clear_all.svg</iconset>
+          <property name="rightMargin">
+           <number>10</number>
           </property>
-         </widget>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="max_width_lb">
+            <property name="text">
+             <string>最大寬度：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="max_width_value"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="max_heigth_lb">
+            <property name="text">
+             <string>最大高度：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="max_heigth_value">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -167,14 +199,70 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="item_list_info_lb">
-        <property name="text">
-         <string>雙擊列表物件可顯示放大圖片，滑鼠可拖曳物件來排序</string>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="leftMargin">
+         <number>5</number>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+        <property name="topMargin">
+         <number>5</number>
         </property>
-       </widget>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="item_list_info_lb">
+          <property name="text">
+           <string>雙擊列表物件可顯示放大圖片，滑鼠可拖曳物件來排序</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clear_list_btn">
+          <property name="toolTip">
+           <string>清空列表的物件</string>
+          </property>
+          <property name="text">
+           <string>清空列表</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources_rc.qrc">
+            <normaloff>:/statics/clear_all.svg</normaloff>:/statics/clear_all.svg</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="h_button_layout">
@@ -295,4 +383,7 @@
   <include location="../resources_rc.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="stitch_mode"/>
+ </buttongroups>
 </ui>

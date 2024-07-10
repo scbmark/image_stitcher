@@ -74,6 +74,7 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         self.ui.menu_about_about.triggered.connect(self.show_about_window)
 
         self.ui.items_list.send_new_item.connect(self.add_drag_img)
+        self.ui.horizon_rtn.toggled.connect(self.switch_mode)
 
         self.ui.clear_list_btn.clicked.connect(self.clear_list)
         self.ui.items_list.itemDoubleClicked.connect(self.show_big_img_window)
@@ -149,6 +150,15 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         self.about_ui.exit_btn.clicked.connect(lambda: self.AboutWindows.close())
         self.AboutWindows.show()
 
+    def switch_mode(self):
+        if self.ui.horizon_rtn.isChecked():
+            self.ui.max_width_value.setEnabled(True)
+            self.ui.max_heigth_value.setDisabled(True)
+        else:
+            self.ui.max_heigth_value.setEnabled(True)
+            self.ui.max_width_value.setDisabled(True)
+
+
     def add_drag_img(self, pictures: list):
         """
         add images from drag and drop
@@ -192,12 +202,16 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         pic_sence.addPixmap(item_tuple[0])
         pic_view.setScene(pic_sence)
 
+        pic_size_lb = QtWidgets.QLabel()
+        pic_size_lb.setText(f"寬：{item_tuple[2][0]} 高：{item_tuple[2][1]}")
+
         delete_button = QtWidgets.QPushButton("")
         delete_button.setIcon(QtGui.QIcon(QtGui.QPixmap(":/statics/close.svg")))
         delete_button.clicked.connect(lambda: self.delete_item(item))
 
         item_layout.addWidget(pic_name_lb)
         item_layout.addWidget(pic_view)
+        item_layout.addWidget(pic_size_lb)
         item_layout.addStretch()
         item_layout.addWidget(delete_button)
 
@@ -305,16 +319,24 @@ class MainWindow_controller(QtWidgets.QMainWindow):
                 new_im.paste(img, (x_offset, 0))
                 x_offset += img.size[0]
 
-        else:
-            total_width = max(widths)
-            max_height = sum(heights)
+            if self.ui.max_width_value.text():
+                set_width = int(self.ui.max_width_value.text())
+                new_im = new_im.resize((set_width, int(set_width/total_width*max_height)))
 
-            new_im = Image.new("RGB", (total_width, max_height))
+        else:
+            max_width = max(widths)
+            total_height = sum(heights)
+
+            new_im = Image.new("RGB", (max_width, total_height))
 
             y_offset = 0
             for img in images:
                 new_im.paste(img, (0, y_offset))
                 y_offset += img.size[1]
+
+            if self.ui.max_heigth_value.text():
+                set_height = int(self.ui.max_heigth_value.text())
+                new_im = new_im.resize((int(set_height/total_height*max_width), set_height))
 
         new_im.save(f"{output_dir}.jpg")
 

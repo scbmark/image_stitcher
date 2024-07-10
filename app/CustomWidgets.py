@@ -134,6 +134,9 @@ class LoadImage(QThread):
     def add_items(self):
         for count, picture in enumerate(self.picture_list, start=1):
             with Image.open(picture) as img:
+                img_w = img.width
+                img_h = img.height
+
                 img.thumbnail(size=(96, 64))
                 img_raw_data = img.convert("RGB").tobytes("raw", "RGB")
                 img = QtGui.QImage(
@@ -147,7 +150,7 @@ class LoadImage(QThread):
             img = QtGui.QPixmap.fromImage(img)
 
             self.send_progress.emit(f"{count} / {len(self.picture_list)}")
-            self.send_img_item.emit((img, picture))
+            self.send_img_item.emit((img, picture, (img_w, img_h)))
         self.send_progress.emit("無")
 
     def run(self):
